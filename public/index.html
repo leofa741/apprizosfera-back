@@ -8,16 +8,16 @@
 </head>
 <body>
 
-    <h1> Hello World    </h1>
-    <div id="buttonDiv"></div> 
+    <!-- <h1> Hello World    </h1>
+   <div id="buttonDiv"></div>  
 
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script> 
     <script>
 
-        //var url = "https://www.rizosfera.com.ar/api/login/google";
+        var url = "https://www.rizosfera.com.ar/api/login/google";
         var url = "http://localhost:3000/api/login/google";
         function handleCredentialResponse(response) {
-         //console.log("Encoded JWT ID token: " + response.credential);
+         console.log("Encoded JWT ID token: " + response.credential);
 
          fetch(
             url,
@@ -39,11 +39,11 @@
           });
           google.accounts.id.renderButton(
             document.getElementById("buttonDiv"),
-            { theme: "outline", size: "large" }  // customization attributes
+            { theme: "outline", size: "large" }  
           );
-          google.accounts.id.prompt(); // also display the One Tap dialog
+          google.accounts.id.prompt(); 
         }
     </script>
-   
+    -->
 </body>
 </html>
