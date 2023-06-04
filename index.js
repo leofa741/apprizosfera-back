@@ -9,8 +9,7 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 // CORS
-app.use(cors());
-
+app.use( cors() );
 // Directorio publico
 
 app.use(express.static('public'));
