@@ -51,14 +51,14 @@ const uploadFile = async(req, res = response) => {
     const nombreArchivo = `${uuidv4()}.${extensionArchivo}`;
     // Path para guardar la imagen
 
-    const path = `https://github.com/leofa741/apprizosfera-back.git/uploads/${tipo}/${nombreArchivo}`;
+    const path = `./uploads/${tipo}/${nombreArchivo}`;
     // Mover la imagen
 
     file.mv(path, (err) => {
         if (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Error al mover la imagen',err
+                msg: 'Error al mover la imagen',err,path
                 
             })
         }
