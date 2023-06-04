@@ -62,13 +62,15 @@ const uploadFile = async(req, res = response) => {
    // Mover la imagen
 
     file.mv(path, (err) => {
+
+        
         if (err) {
             console.log(err);
             return res.status(500).json({
                 msg: 'Error al mover la imagen',err,path
                 
             })
-        }
+        }        
 
         // Actualizar base de datos
 
@@ -79,7 +81,9 @@ const uploadFile = async(req, res = response) => {
             nombreArchivo
         })
 
-    });
+    }
+    
+    );
 
 }
 

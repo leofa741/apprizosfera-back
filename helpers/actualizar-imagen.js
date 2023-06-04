@@ -19,6 +19,7 @@ const actualizarImagen = async (tipo, id, path , nombreArchivo) => {
             }
 
             const pathViejo = `./uploads/usuarios/${usuario.img}`;
+            console.log("pathViejo", pathViejo);
             actualizarImagen(pathViejo, path);
 
            if (fs.existsSync(pathViejo)) {
