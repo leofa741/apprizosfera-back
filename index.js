@@ -2,6 +2,7 @@ const express = require('express');
 const { dbConnection } = require('./database/config');
 require('dotenv').config();
 const cors = require('cors');
+const path = require('path');
 
 
 
@@ -12,7 +13,6 @@ const port = process.env.PORT || 3000;
 app.use( cors() );
 // Directorio publico
 
-app.use(express.static('public'));
 
 
 // Lectura y parseo del body
@@ -25,6 +25,9 @@ app.use(express.json());
 // Database
 dbConnection();
 
+// Directorio publico
+app.use(express.static('public'));
+
 // Routes
 app.use('/api/usuarios', require('./routes/usuarios')); // Ruta para usuarios
 app.use('/api/login', require('./routes/auth')); // Ruta para login
@@ -32,6 +35,12 @@ app.use('/api/categorias', require('./routes/categorias')); // Ruta para categor
 app.use('/api/productos', require('./routes/productos')); // Ruta para productos
 app.use('/api/buscar', require('./routes/busquedas')); // Ruta para busquedas
 app.use('/api/uploads', require('./routes/uploads')); // Ruta para busquedas
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public/index.html'));
+});
+
+
 
 
 
