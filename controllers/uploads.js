@@ -58,7 +58,8 @@ const uploadFile = async(req, res = response) => {
         if (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Error al mover la imagen'
+                msg: 'Error al mover la imagen',err
+                
             })
         }
 
