@@ -51,7 +51,7 @@ const uploadFile = async(req, res = response) => {
     const nombreArchivo = `${uuidv4()}.${extensionArchivo}`;
     // Path para guardar la imagen
 
-    const path = `./uploads/${tipo}/${nombreArchivo}`;
+    const path = `/uploads/${tipo}/${nombreArchivo}`;
     // Mover la imagen
 
     file.mv(path, (err) => {
