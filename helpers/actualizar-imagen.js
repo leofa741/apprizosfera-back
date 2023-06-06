@@ -61,7 +61,7 @@ const actualizarImagen = async (tipo, id, path , nombreArchivo) => {
         const categorias = await Categoria.findById(id);
 
         if (!categorias) {
-            console.log('No es un productos por id');
+            console.log('No es una categoria por id');
             return false;
         }
 

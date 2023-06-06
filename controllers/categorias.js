@@ -113,6 +113,16 @@ const borrarCategoria = async(req, res = response) => {
                 msg: 'No existe una categoria con ese id'
             });
         }
+
+        await Categoria.findByIdAndDelete(uid);
+
+        res.json({  
+            ok: true,
+            msg: 'Categoria eliminada'
+        });
+        
+
+
 }
     catch (error) {
         console.log(error);
