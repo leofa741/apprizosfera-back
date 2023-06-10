@@ -4,7 +4,7 @@ const { validarcampos } = require('../middlewares/validar-campos');
 
 const { validarJWT } = require('../middlewares/validar-jws');
 
-const { getProductos, crearProducto, actualizarProducto, borrarProducto } = require('../controllers/productos');
+const { getProductos, crearProducto, actualizarProducto, borrarProducto , getProductosById} = require('../controllers/productos');
 
 
 
@@ -28,6 +28,7 @@ router.post('/', [
     check('categoria', 'La categoría es incorrecta').isMongoId(),
     check('precio', 'El precio debe ser un número').isNumeric(),
     check('descripcion', 'La descripción es obligatoria').not().isEmpty(),
+    check('linkdepago', 'El link de pago es obligatorio'),
     validarcampos
 ], crearProducto);
 
@@ -40,14 +41,16 @@ router.put('/:id', [
     check('categoria', 'La categoría es incorrecta').isMongoId(),
     check('precio', 'El precio debe ser un número').isNumeric(),
     check('descripcion', 'La descripción es obligatoria').not().isEmpty(),
+    check('linkdepago', 'El link de pago es obligatorio'),
     validarcampos
 ], actualizarProducto);
 
 
 // Borrar una producto - Admin
 
-router.delete('/:id', borrarProducto);
+router.delete('/:id', validarJWT, borrarProducto);
 
+router.get('/:id', validarJWT,   getProductosById);
 
 
 module.exports = router;

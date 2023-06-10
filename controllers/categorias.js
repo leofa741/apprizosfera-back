@@ -10,7 +10,7 @@ const getCategorias = async(req, res) => {
         Categoria.countDocuments(),
         Categoria.find().populate('usuario', 'nombre img')
             .skip( desde )
-            .limit( 6 )
+            .limit( 10 )
     ])
     .then( respuestas => {
 

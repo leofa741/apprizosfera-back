@@ -31,12 +31,50 @@ const getProductos = async(req, res) => {
         
             });
             
-
-
-
         }
 
+        
 
+        const getProductosById = async(req, res) => {    
+            const id = req.params.id;  
+
+            
+            
+            try {
+
+              
+          
+            await Promise.all([
+                Producto.countDocuments(),
+                Producto.findById(id)
+                             .populate('usuario', 'nombre img')
+                              .populate('categoria', 'nombre img')
+                  
+            ])
+            .then( respuestas => {
+                    
+                    res.json({
+                        ok: true,
+                        productos: respuestas[1],
+                    
+                    });
+            
+                });
+
+            } catch (error) {
+
+                console.log(error);
+                res.status(500).json({
+                    ok: false,
+                    msg: 'Hable con el administrador',
+                    error: error
+        
+                });
+        
+            }
+
+     }
+        
 
 const crearProducto = async(req, res = response) => {
 
@@ -116,9 +154,7 @@ const actualizarProducto = async(req, res = response) => {
 const borrarProducto = async(req, res = response) => {
 
     const uid = req.params.id;
-
     try {
-
         const productoDB = await Producto.findById(uid);
         if (!productoDB) {
             return res.status(404).json({
@@ -155,6 +191,7 @@ module.exports = {
     getProductos,
     crearProducto,
     actualizarProducto,
-    borrarProducto
+    borrarProducto,
+    getProductosById
 }
 // Compare this snippet from routes\productos.js:

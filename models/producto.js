@@ -33,6 +33,9 @@ const ProductoSchema = Schema({
     descripcion: {
         type: String
     },
+    linkdepago: {
+        type: String
+    },
 
     disponible: {
         type: Boolean,

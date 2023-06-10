@@ -7,6 +7,7 @@ const path = require('path');
 
 
 
+
 const app = express();
 const port = process.env.PORT || 3000;
 // CORS
@@ -27,6 +28,8 @@ dbConnection();
 
 // Directorio publico
 app.use(express.static('public'));
+
+
 
 // Routes
 app.use('/api/usuarios', require('./routes/usuarios')); // Ruta para usuarios
