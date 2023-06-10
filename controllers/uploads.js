@@ -111,13 +111,12 @@ const uploadFileCloud = async(req, res = response) => {
         })
     }
 
-    const file = req.files.imagen;   
-
+ 
    try {
     const {tempFilePath} = req.files.imagen
     const {secure_url} = await cloudinary.uploader.upload(tempFilePath,{folder:tipo});
     const nombreArchivo = secure_url;
-    actualizarImagen(tipo, id,nombreArchivo,nombreArchivo);
+    actualizarImagen(tipo, id,nombreArchivo);
     res.json({
         msg: 'Archivo subido correctamente',
         nombreArchivo
