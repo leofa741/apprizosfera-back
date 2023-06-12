@@ -22,7 +22,7 @@ const UsuarioSchema = Schema({
     },
     telefono:{
         type: String,
-        required: [true, 'El telefono es obligatorio']
+        
     },
 
     rol: {

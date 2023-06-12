@@ -20,15 +20,12 @@ app.use( cors() );
 
 app.use(express.json());
 
-
+// Directorio publico
+app.use(express.static('public'));
 
 
 // Database
 dbConnection();
-
-// Directorio publico
-app.use(express.static('public'));
-
 
 
 // Routes
