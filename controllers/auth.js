@@ -54,48 +54,66 @@ const login = async( req, res = response ) => {
 const googleSignIn = async( req, res = response ) => {
 
     try {
-        const googleUser = await googleVerify( req.body.token );
-        const { email, name, picture } = googleUser;
-        const usuarioDB = await Usuario.findOne({ email });
-        let usuario;
 
-        if ( !usuarioDB ) {
-            // Si no existe el usuario
-            usuario = new Usuario({
-                nombre: name,
-                email,
-                telefono,
-                password: '@@@',
-                img: picture,
-                google: true
+    const very = await googleVerify( req.body.token );
+    const { name, email, picture } = very;
 
-            });
-        } else {
-            // Existe usuario
-            usuario = usuarioDB;
-            usuario.google = true;
-        }
+    // Verificar si el usuario existe en la BD
 
-        // Guardar en DB
-        await usuario.save();
-        // Generar el TOKEN - JWT
-        const token = await generarJWT( usuario.id );
+    const usuarioDB = await Usuario.findOne({ email });
 
-        return  res.status(200).json({  
+    let usuario;
+
+    if ( !usuarioDB ) {
+
+        // Si no existe el usuario
+        usuario = new Usuario({
+            nombre: name,
+            email,
+            tipo: 'google',
+            password: '@@@',
+            img: picture,
+            google: true,
+            telefono: '0000000000'
+        });
+    }
+    else {
+        // Existe usuario
+        usuario = usuarioDB;
+        usuario.google = true;
+        usuario.password = '@@@';
+    }
+
+
+    // Guardar en BD
+
+    await usuario.save();
+
+    // Generar el TOKEN - JWT
+
+    const token = await generarJWT( usuario.id );
+
+    res.json({  
         ok: true,
-        msg: googleUser,
+        name,
+        email,
+        picture,
         token
     })
 
+    } catch (error) {
+        console.log("errr",error);
+
+
+    res.json({  
+        ok: true,
+        msg: 'Token no es correcto'
+    })
+
 }
-    catch (error) {
 
-        return res.status(401).json({
-            ok: false,
-            msg: 'Token no válido'
-        });
-    }         
 
+ 
 }
 
 
