@@ -6,17 +6,10 @@ const { generarJWT } = require('../helpers/jwt');
 const getProductos = async(req, res) => {       
         
     const desde = Number(req.query.desde) || 0;
-        // const productos = await  Producto.find().populate('usuario', 'nombre img').populate('categoria', 'nombre img');
-
-        // res.json({
-        //     ok: true,
-        //     productos: productos,
-        //     uid: req.uid
-        // });
-
+      
         await Promise.all([
             Producto.countDocuments(),
-            Producto.find().populate('usuario', 'nombre img')
+            Producto.find().populate('usuario', 'nombre img telefono')
                           .populate('categoria', 'nombre img')
                 .skip( desde )
                 .limit( 6 )
@@ -36,43 +29,32 @@ const getProductos = async(req, res) => {
         
 
         const getProductosById = async(req, res) => {    
-            const id = req.params.id;  
-
+            const id = req.params.id;             
             
-            
-            try {
-
-              
-          
+            try {    
             await Promise.all([
                 Producto.countDocuments(),
                 Producto.findById(id)
-                             .populate('usuario', 'nombre img')
+                             .populate('usuario', 'nombre img telefono')
                               .populate('categoria', 'nombre img')
                   
             ])
-            .then( respuestas => {
-                    
+            .then( respuestas => {                    
                     res.json({
                         ok: true,
-                        productos: respuestas[1],
-                    
+                        productos: respuestas[1],                    
                     });
             
                 });
 
             } catch (error) {
-
                 console.log(error);
                 res.status(500).json({
                     ok: false,
                     msg: 'Hable con el administrador',
-                    error: error
-        
-                });
-        
+                    error: error        
+                });        
             }
-
      }
         
 

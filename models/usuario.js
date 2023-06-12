@@ -20,6 +20,10 @@ const UsuarioSchema = Schema({
     img: {
         type: String
     },
+    telefono:{
+        type: String,
+        required: [true, 'El telefono es obligatorio']
+    },
 
     rol: {
         type: String,
