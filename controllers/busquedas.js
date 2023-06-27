@@ -10,15 +10,15 @@ const Categoria = require('../models/categoria');
 const getTodo = async(req, res = response) => {
 
     const busqueda = req.params.busqueda;
-    const regex = new RegExp( busqueda.toLowerCase(), 'i' );
+    const regex = new RegExp( busqueda.toLowerCase(), 'i', 'o', 'í ', 'á', 'é', 'ó', 'ú' );
 
     if (isNaN(busqueda)) {
         const [ usuarios, productos, categorias ] = await Promise.all([
             Usuario.find({ nombre: regex }),
-            Producto.find({ $or: [ { nombre: regex }, { descripcion: regex } ] }  ) 
+            Producto.find({ $or: [ { nombre: regex }, { descripcion: regex } ] })
             .populate('usuario', 'nombre img')
             .populate('categoria', 'nombre img'),
-            Categoria.find({ nombre: regex }),
+            Categoria.find({ $or: [ { nombre: regex } ] })   
         ]);
         res.json({
             ok: true,
@@ -33,7 +33,7 @@ const getTodo = async(req, res = response) => {
     const [ usuarios, productos, categorias ] = await Promise.all([
         Usuario.find({ nombre: regex }),
       
-        Producto.find({ precio: busqueda }),
+        Producto.find({ nombre: busqueda }),
            Categoria.find({ nombre: regex }),
     ]);
 

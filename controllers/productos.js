@@ -13,6 +13,9 @@ const getProductos = async(req, res) => {
                           .populate('categoria', 'nombre img')
                 .skip( desde )
                 .limit( 6 )
+              
+
+            
         ])
         .then( respuestas => {
                 
