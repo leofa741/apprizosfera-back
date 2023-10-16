@@ -152,7 +152,7 @@ const createArticle = async(req, res = response) => {
                     msg: 'No existe un artículo con ese id'
                 });
             }
-          // Actualizaciones
+          // Actualizaciones del back
             const { usuario, ...campos } = req.body;
             if ( articledb.usuario.toString() !== req.uid ) {
                 return res.status(401).json({
