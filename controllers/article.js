@@ -157,7 +157,7 @@ const createArticle = async(req, res = response) => {
             if ( articledb.usuario.toString() !== req.uid ) {
                 return res.status(401).json({
                     ok: false,
-                    msg: 'No tiene privilegio de editar este artículo, no es el creador'
+                    msg: 'No tiene privilegios de editar este artículo, no es el creador'
                 });
             }
             campos.usuario = req.uid;
