@@ -19,11 +19,10 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
             if (!usuario) {
                 console.log('No es un usuario por id');
                 return false;
-            }
-            const pathViejo = usuario.img;               
+            }                          
 
-           if (pathViejo) {
-            const nombreArr = pathViejo.split('/');
+           if (usuario.img) {
+            const nombreArr = usuario.img.split('/');
             const nombre = nombreArr[nombreArr.length - 1];
             const [ public_id ] = nombre.split('.');
          
@@ -45,15 +44,10 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
             return false;
         }
 
-        const pathViejoproductos = productos.img;
-       // actualizarImagen(pathViejoproductos, path);
-        console.log("pathViejoproductos", pathViejoproductos);  
-               
-        if (pathViejoproductos) {
-         const nombreArr = pathViejoproductos.split('/');
+         if (productos.img) {
+         const nombreArr = productos.img.split('/');
          const nombre = nombreArr[nombreArr.length - 1];
-         const [ public_id ] = nombre.split('.');
-   
+         const [ public_id ] = nombre.split('.');   
          await  cloudinary.uploader.destroy('productos/' + public_id);
       
       }
@@ -71,12 +65,9 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
             console.log('No es una categoria por id');
             return false;
         }
-        const pathViejocategorias = categorias.img;
-     //  actualizarImagen(pathViejocategorias, path);
-        console.log("pathViejocategorias", pathViejocategorias);
-
-     if (pathViejocategorias) {
-        const nombreArr = pathViejocategorias.split('/');
+      
+     if (categorias.img) {
+        const nombreArr = categorias.img.split('/');
         const nombre = nombreArr[nombreArr.length - 1];      
         const [public_id] = nombre.split('.');        
         await  cloudinary.uploader.destroy('categorias/' + public_id);     
@@ -96,12 +87,9 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
             return false;
         }
 
-        const pathViejoarticulos = articulos.img;
-      //  actualizarImagen(pathViejoarticulos, path);
-        console.log("pathViejoarticulos", pathViejoarticulos);
-
-        if (pathViejoarticulos) {
-            const nombreArr = pathViejoarticulos.split('/');
+       
+        if (articulos.img) {
+            const nombreArr = articulos.img.split('/');
             const nombre = nombreArr[nombreArr.length - 1];
             const [ public_id ] = nombre.split('.');
             await  cloudinary.uploader.destroy('articulos/' + public_id);

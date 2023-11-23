@@ -17,13 +17,6 @@ cloudinary.config(process.env.CLOUDINARY_URL);
 
 
 
-// cloudinary.config({
-//     cloud_name: "dnv2e0j4l",
-//     api_key: "994123746111941",
-//     api_secret: "abb_rT2N9F_vlKW69ytjxDs8taE"
-//   });
-
-
 const uploadFile = async(req, res = response) => {
     const { tipo, id } = req.params;
 
